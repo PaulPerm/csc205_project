@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Students - DegreeFlow</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.0/css/bulma.min.css" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+</head>
+<body>
+
+  
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <span class="navbar-item"><i class="fas fa-graduation-cap"></i> DegreeFlow</span>
+    </div>
+    <div class="navbar-menu">
+      <div class="navbar-start">
+        <a class="navbar-item" href="student_select.html">Students</a>
+      </div>
+      <div class="navbar-end">
+        <div class="navbar-item">
+          <a class="button is-light" href="login.html">Logout</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <section class="section">
+    <div class="container">
+
+    
+      <div class="columns is-vcentered mb-4">
+        <div class="column">
+          <h2 class="title is-4">Students</h2>
+        </div>
+        <!-- <div class="column is-narrow">
+          <button class="button is-primary">+ Add Student</button>
+        </div> -->
+      </div>
+
+      
+      <div class="columns mb-4">
+        <div class="column">
+          <div class="control">
+            <input class="input" type="text" placeholder="Search students..." />
+          </div>
+        </div>
+        <div class="column is-narrow">
+          <div class="select">
+            <select>
+              <option>Sort by: Name</option>
+              <option>Sort by: Major</option>
+              <option>Sort by: Credits</option>
+            </select>
+          </div>
+        </div>
+        <div class="column is-narrow">
+          <label class="checkbox">
+            
+          </label>
+        </div>
+      </div>
+
+     
+      <div class="box">
+        <div class="columns is-vcentered">
+          <div class="column">
+            <strong>Stevens, John</strong>
+            <p class="is-size-7">Computer Science</p>
+          </div>
+          <div class="column is-narrow">
+            78 credits
+          </div>
+          
+          <div class="column is-narrow">
+            <a class="button is-small is-primary" href="checksheet.html">View</a>
+            <a class="button is-small is-light" href="build_mode.html">Edit</a>
+            <a class="button is-small is-danger" href="checksheet.html">Remove</a>
+            
+          </div>
+        </div>
+      </div>
+
+      <div class="box">
+        <div class="columns is-vcentered">
+          <div class="column">
+            <strong>Hayden, Roger</strong>
+            <p class="is-size-7">Cybersecurity</p>
+          </div>
+          <div class="column is-narrow">
+            42 credits
+          </div>
+          
+          <div class="column is-narrow">
+            <a class="button is-small is-primary" href="checksheet.html">View</a>
+            <a class="button is-small is-light" href="build_mode.html">Edit</a>
+            <a class="button is-small is-danger" href="checksheet.html">Remove</a>
+            
+            
+          </div>
+        </div>
+      </div>
+
+      <div class="box">
+        <div class="columns is-vcentered">
+            <div class="column">
+                <strong>Smith, Hannah</strong>
+                <p class="is-size-7">Computer Science</p>
+            </div>
+            <div class="column is-narrow">
+                0 credits
+            </div>
+            
+            <div class="column is-narrow">
+                <a class="button is-small is-primary" href="checksheet.html">View</a>
+                <a class="button is-small is-light" href="build_mode.html">Edit</a>
+                <a class="button is-small is-danger" href="checksheet.html">Remove</a>
+                
+            </div>
+        </div>
+      </div>
+      
+
+    </div>
+  </section>
+
+</body>
+</html>

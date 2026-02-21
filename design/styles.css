@@ -1,0 +1,37 @@
+:root {
+  --green:  #629D69;
+  --purple: #69629D;
+  --orange:   #9D6962;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  color: black;
+}
+
+body {
+  font-family: Georgia, serif;
+  padding: 24px;
+  min-height: 100vh;
+  background-color: azure;
+}
+.navbar {
+    background-color: var(--green);
+    color: black !important;
+}
+.button.is-primary
+{
+    background-color: var(--green);
+}
+th 
+{
+    background-color: var(--green) !important;
+}
+.box
+{
+    background-color: whitesmoke;
+    box-shadow: 0 2px 8px rgba(105, 98, 157, 0.4);
+}
+
