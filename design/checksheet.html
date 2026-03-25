@@ -1,515 +1,488 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <title>Checksheet</title>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.0/css/bulma.min.css" />
-  <link rel="stylesheet" href="styles.css" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
-</head>
-<body>
-
-  
-  <nav class="navbar">
-    <div class="navbar-brand">
-      <span class="navbar-item"><i class="fas fa-graduation-cap"></i> DegreeFlow</span>
-    </div>
-    <div class="navbar-menu">
-      <div class="navbar-start">
-        <a class="navbar-item" href="student_select.html">Students</a>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Checksheet</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.0/css/bulma.min.css" />
+    <link rel="stylesheet" href="styles.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+  </head>
+  <body>
+    <nav class="navbar">
+      <div class="navbar-brand">
+        <span class="navbar-item"><i class="fas fa-graduation-cap"></i> DegreeFlow</span>
       </div>
-      <div class="navbar-end">
-        <div class="navbar-item">
-          <a class="button is-light" href="login.html">Logout</a>
+      <div class="navbar-menu">
+        <div class="navbar-start">
+          <a class="navbar-item" href="student_select.html">Students</a>
         </div>
-      </div>
-    </div>
-  </nav>
-
-  <section class="section">
-    <div class="container">
-
-      
-      <div class="box">
-        <h2 class="title is-4">John Stevens — Computer Science: Data Science</h2>
-        <p class="subtitle is-6">Four-Year Academic Plan</p>
-
-        
-        <div class="tags">
-          
-          <span class="tag is-info">Enrolled</span>
-          <span class="tag is-success">Completed</span>
-          <span class="tag is-danger">Failed</span>
-          <strong class="ml-auto">0 / 121 Credits Earned</strong>
-        </div>
-
-        
-        <p class="mt-3"><strong>Overall Progress</strong></p>
-        <progress class="progress" value="0" max="121">0%</progress>
-
-        <div class="buttons mt-3">
-          <a class="button is-primary" href="build_mode.html">Enter Build Mode</a>
-          <button class="button is-light">Print</button>
-          <a class="button is-light" href="student_select.html">Back to Students</a>
-        </div>
-      </div>
-
-      
-      <div class="box">
-        <h3 class="title is-5">Metrics</h3>
-        <div class="columns">
-          <div class="column">
-            <p class="heading">Completed</p>
-            <p class="title">0</p>
-          </div>
-          <div class="column">
-            <p class="heading">Enrolled</p>
-            <p class="title">0</p>
-          </div>
-          
-          <div class="column">
-            <p class="heading">Remaining</p>
-            <p class="title">121</p>
+        <div class="navbar-end">
+          <div class="navbar-item">
+            <a class="button is-light" href="login.html">Logout</a>
           </div>
         </div>
       </div>
+    </nav>
 
-      
-      <div class="box">
-        <h3 class="title is-5">Year 1</h3>
-        <div class="columns">
+    <section class="section">
+      <div class="container">
+        <div class="box">
+          <h2 class="title is-4">John Stevens — Computer Science: Data Science</h2>
+          <p class="subtitle is-6">Four-Year Academic Plan</p>
 
-          
-          <div class="column">
-            <div class="columns is-vcentered mb-2">
-              <div class="column"><strong>Fall Semester</strong></div>
-              <div class="column is-narrow has-text-right">14 Credits</div>
+          <div class="tags">
+            <span class="tag is-info">Enrolled</span>
+            <span class="tag is-success">Completed</span>
+            <span class="tag is-danger">Failed</span>
+            <strong class="ml-auto">0 / 121 Credits Earned</strong>
+          </div>
+
+          <p class="mt-3"><strong>Overall Progress</strong></p>
+          <progress class="progress" value="0" max="121">0%</progress>
+
+          <div class="buttons mt-3">
+            <a class="button is-primary" href="build_mode.html">Enter Build Mode</a>
+            <button class="button is-light">Print</button>
+            <a class="button is-light" href="student_select.html">Back to Students</a>
+          </div>
+        </div>
+
+        <div class="box">
+          <h3 class="title is-5">Metrics</h3>
+          <div class="columns">
+            <div class="column">
+              <p class="heading">Completed</p>
+              <p class="title">0</p>
+            </div>
+            <div class="column">
+              <p class="heading">Enrolled</p>
+              <p class="title">0</p>
             </div>
 
-            <div class="box">
-              <div class="columns is-vcentered is-mobile">
-                <div class="column is-narrow"><input type="radio" /></div>
-                <div class="column">
-                  <strong>CSC 110</strong>
-                  <p class="is-size-7">Introduction to Computer Science</p>
+            <div class="column">
+              <p class="heading">Remaining</p>
+              <p class="title">121</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="box">
+          <h3 class="title is-5">Year 1</h3>
+          <div class="columns">
+            <div class="column">
+              <div class="columns is-vcentered mb-2">
+                <div class="column"><strong>Fall Semester</strong></div>
+                <div class="column is-narrow has-text-right">14 Credits</div>
+              </div>
+
+              <div class="box">
+                <div class="columns is-vcentered is-mobile">
+                  <div class="column is-narrow"><input type="radio" /></div>
+                  <div class="column">
+                    <strong>CSC 110</strong>
+                    <p class="is-size-7">Introduction to Computer Science</p>
+                  </div>
+                  <div class="column is-narrow">3 cr</div>
                 </div>
-                <div class="column is-narrow">3 cr</div>
+              </div>
+
+              <div class="box">
+                <div class="columns is-vcentered is-mobile">
+                  <div class="column is-narrow"><input type="radio" /></div>
+                  <div class="column">
+                    <strong>MAT 151</strong>
+                    <p class="is-size-7">Calculus I</p>
+                  </div>
+                  <div class="column is-narrow">4 cr</div>
+                </div>
+              </div>
+
+              <div class="box">
+                <div class="columns is-vcentered is-mobile">
+                  <div class="column is-narrow"><input type="radio" /></div>
+                  <div class="column">
+                    <strong>ENG 101</strong>
+                    <p class="is-size-7">English Composition I</p>
+                  </div>
+                  <div class="column is-narrow">3 cr</div>
+                </div>
+              </div>
+
+              <div class="box">
+                <div class="columns is-vcentered is-mobile">
+                  <div class="column is-narrow"><input type="radio" /></div>
+                  <div class="column">
+                    <strong>GEN 101</strong>
+                    <p class="is-size-7">First Year Seminar</p>
+                  </div>
+                  <div class="column is-narrow">1 cr</div>
+                </div>
+              </div>
+
+              <div class="box">
+                <div class="columns is-vcentered is-mobile">
+                  <div class="column is-narrow"><input type="radio" /></div>
+                  <div class="column">
+                    <strong>BIB 101</strong>
+                    <p class="is-size-7">Old Testament Survey</p>
+                  </div>
+                  <div class="column is-narrow">3 cr</div>
+                </div>
               </div>
             </div>
 
-            <div class="box">
-              <div class="columns is-vcentered is-mobile">
-                <div class="column is-narrow"><input type="radio" /></div>
-                <div class="column">
-                  <strong>MAT 151</strong>
-                  <p class="is-size-7">Calculus I</p>
-                </div>
-                <div class="column is-narrow">4 cr</div>
+            <div class="column">
+              <div class="columns is-vcentered mb-2">
+                <div class="column"><strong>Spring Semester</strong></div>
+                <div class="column is-narrow has-text-right">17 Credits</div>
               </div>
-            </div>
 
-            <div class="box">
-              <div class="columns is-vcentered is-mobile">
-                <div class="column is-narrow"><input type="radio" /></div>
-                <div class="column">
-                  <strong>ENG 101</strong>
-                  <p class="is-size-7">English Composition I</p>
+              <div class="box">
+                <div class="columns is-vcentered is-mobile">
+                  <div class="column is-narrow"><input type="radio" /></div>
+                  <div class="column">
+                    <strong>CSC 120</strong>
+                    <p class="is-size-7">Programming I</p>
+                  </div>
+                  <div class="column is-narrow">3 cr</div>
                 </div>
-                <div class="column is-narrow">3 cr</div>
               </div>
-            </div>
 
-            <div class="box">
-              <div class="columns is-vcentered is-mobile">
-                <div class="column is-narrow"><input type="radio" /></div>
-                <div class="column">
-                  <strong>GEN 101</strong>
-                  <p class="is-size-7">First Year Seminar</p>
+              <div class="box">
+                <div class="columns is-vcentered is-mobile">
+                  <div class="column is-narrow"><input type="radio" /></div>
+                  <div class="column">
+                    <strong>MAT 152</strong>
+                    <p class="is-size-7">Calculus II</p>
+                  </div>
+                  <div class="column is-narrow">4 cr</div>
                 </div>
-                <div class="column is-narrow">1 cr</div>
               </div>
-            </div>
 
-            <div class="box">
-              <div class="columns is-vcentered is-mobile">
-                <div class="column is-narrow"><input type="radio" /></div>
-                <div class="column">
-                  <strong>BIB 101</strong>
-                  <p class="is-size-7">Old Testament Survey</p>
+              <div class="box">
+                <div class="columns is-vcentered is-mobile">
+                  <div class="column is-narrow"><input type="radio" /></div>
+                  <div class="column">
+                    <strong>ENG 102</strong>
+                    <p class="is-size-7">English Composition II</p>
+                  </div>
+                  <div class="column is-narrow">3 cr</div>
                 </div>
-                <div class="column is-narrow">3 cr</div>
+              </div>
+
+              <div class="box">
+                <div class="columns is-vcentered is-mobile">
+                  <div class="column is-narrow"><input type="radio" /></div>
+                  <div class="column">
+                    <strong>PHY 211</strong>
+                    <p class="is-size-7">Physics I</p>
+                  </div>
+                  <div class="column is-narrow">4 cr</div>
+                </div>
+              </div>
+
+              <div class="box">
+                <div class="columns is-vcentered is-mobile">
+                  <div class="column is-narrow"><input type="radio" /></div>
+                  <div class="column">
+                    <strong>BIB 102</strong>
+                    <p class="is-size-7">New Testament Survey</p>
+                  </div>
+                  <div class="column is-narrow">3 cr</div>
+                </div>
               </div>
             </div>
           </div>
+        </div>
 
-          
-          <div class="column">
-            <div class="columns is-vcentered mb-2">
-              <div class="column"><strong>Spring Semester</strong></div>
-              <div class="column is-narrow has-text-right">17 Credits</div>
-            </div>
+        <div class="box">
+          <h3 class="title is-5">Year 2</h3>
+          <div class="columns">
+            <div class="column">
+              <div class="columns is-vcentered mb-2">
+                <div class="column"><strong>Fall Semester</strong></div>
+                <div class="column is-narrow has-text-right">6 Credits</div>
+              </div>
 
-            <div class="box">
-              <div class="columns is-vcentered is-mobile">
-                <div class="column is-narrow"><input type="radio" /></div>
-                <div class="column">
-                  <strong>CSC 120</strong>
-                  <p class="is-size-7">Programming I</p>
+              <div class="box">
+                <div class="columns is-vcentered is-mobile">
+                  <div class="column is-narrow"><input type="radio" /></div>
+                  <div class="column">
+                    <strong>CSC 205</strong>
+                    <p class="is-size-7">HCI Design & Programming</p>
+                  </div>
+                  <div class="column is-narrow">3 cr</div>
                 </div>
-                <div class="column is-narrow">3 cr</div>
+              </div>
+
+              <div class="box">
+                <div class="columns is-vcentered is-mobile">
+                  <div class="column is-narrow"><input type="radio" /></div>
+                  <div class="column">
+                    <strong>CSC 363</strong>
+                    <p class="is-size-7">Database Systems</p>
+                  </div>
+                  <div class="column is-narrow">3 cr</div>
+                </div>
               </div>
             </div>
 
-            <div class="box">
-              <div class="columns is-vcentered is-mobile">
-                <div class="column is-narrow"><input type="radio" /></div>
-                <div class="column">
-                  <strong>MAT 152</strong>
-                  <p class="is-size-7">Calculus II</p>
-                </div>
-                <div class="column is-narrow">4 cr</div>
+            <div class="column">
+              <div class="columns is-vcentered mb-2">
+                <div class="column"><strong>Spring Semester</strong></div>
+                <div class="column is-narrow has-text-right">7 Credits</div>
               </div>
-            </div>
 
-            <div class="box">
-              <div class="columns is-vcentered is-mobile">
-                <div class="column is-narrow"><input type="radio" /></div>
-                <div class="column">
-                  <strong>ENG 102</strong>
-                  <p class="is-size-7">English Composition II</p>
+              <div class="box">
+                <div class="columns is-vcentered is-mobile">
+                  <div class="column is-narrow"><input type="radio" /></div>
+                  <div class="column">
+                    <strong>CSC 206</strong>
+                    <p class="is-size-7">Web Programming</p>
+                  </div>
+                  <div class="column is-narrow">3 cr</div>
                 </div>
-                <div class="column is-narrow">3 cr</div>
               </div>
-            </div>
 
-            <div class="box">
-              <div class="columns is-vcentered is-mobile">
-                <div class="column is-narrow"><input type="radio" /></div>
-                <div class="column">
-                  <strong>PHY 211</strong>
-                  <p class="is-size-7">Physics I</p>
+              <div class="box">
+                <div class="columns is-vcentered is-mobile">
+                  <div class="column is-narrow"><input type="radio" /></div>
+                  <div class="column">
+                    <strong>CSC 251</strong>
+                    <p class="is-size-7">Networks & Security</p>
+                  </div>
+                  <div class="column is-narrow">4 cr</div>
                 </div>
-                <div class="column is-narrow">4 cr</div>
-              </div>
-            </div>
-
-            <div class="box">
-              <div class="columns is-vcentered is-mobile">
-                <div class="column is-narrow"><input type="radio" /></div>
-                <div class="column">
-                  <strong>BIB 102</strong>
-                  <p class="is-size-7">New Testament Survey</p>
-                </div>
-                <div class="column is-narrow">3 cr</div>
               </div>
             </div>
           </div>
+        </div>
 
+        <div class="box">
+          <h3 class="title is-5">Year 3</h3>
+          <div class="columns">
+            <div class="column">
+              <div class="columns is-vcentered mb-2">
+                <div class="column"><strong>Fall Semester</strong></div>
+                <div class="column is-narrow has-text-right">10 Credits</div>
+              </div>
+
+              <div class="box">
+                <div class="columns is-vcentered is-mobile">
+                  <div class="column is-narrow"><input type="radio" /></div>
+                  <div class="column">
+                    <strong>HUM 303</strong>
+                    <p class="is-size-7">Perspectives: Faith</p>
+                  </div>
+                  <div class="column is-narrow">3 cr</div>
+                </div>
+              </div>
+
+              <div class="box">
+                <div class="columns is-vcentered is-mobile">
+                  <div class="column is-narrow"><input type="radio" /></div>
+                  <div class="column">
+                    <strong>CSC 407</strong>
+                    <p class="is-size-7">Web Engineering</p>
+                  </div>
+                  <div class="column is-narrow">3 cr</div>
+                </div>
+              </div>
+
+              <div class="box">
+                <div class="columns is-vcentered is-mobile">
+                  <div class="column is-narrow"><input type="radio" /></div>
+                  <div class="column">
+                    <strong>CSC 425</strong>
+                    <p class="is-size-7">Op Sys & Architecture</p>
+                  </div>
+                  <div class="column is-narrow">3 cr</div>
+                </div>
+              </div>
+
+              <div class="box">
+                <div class="columns is-vcentered is-mobile">
+                  <div class="column is-narrow"><input type="radio" /></div>
+                  <div class="column">
+                    <strong>PED 103</strong>
+                    <p class="is-size-7">Physical Fitness</p>
+                  </div>
+                  <div class="column is-narrow">1 cr</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="column">
+              <div class="columns is-vcentered mb-2">
+                <div class="column"><strong>Spring Semester</strong></div>
+                <div class="column is-narrow has-text-right">15 Credits</div>
+              </div>
+
+              <div class="box">
+                <div class="columns is-vcentered is-mobile">
+                  <div class="column is-narrow"><input type="radio" /></div>
+                  <div class="column">
+                    <strong>BIB 300</strong>
+                    <p class="is-size-7">Foundations of Chr Thought</p>
+                  </div>
+                  <div class="column is-narrow">3 cr</div>
+                </div>
+              </div>
+
+              <div class="box">
+                <div class="columns is-vcentered is-mobile">
+                  <div class="column is-narrow"><input type="radio" /></div>
+                  <div class="column">
+                    <strong>CSC 203</strong>
+                    <p class="is-size-7">Software Engineering</p>
+                  </div>
+                  <div class="column is-narrow">3 cr</div>
+                </div>
+              </div>
+
+              <div class="box">
+                <div class="columns is-vcentered is-mobile">
+                  <div class="column is-narrow"><input type="radio" /></div>
+                  <div class="column">
+                    <strong>CSC 204</strong>
+                    <p class="is-size-7">Algorithms</p>
+                  </div>
+                  <div class="column is-narrow">3 cr</div>
+                </div>
+              </div>
+
+              <div class="box">
+                <div class="columns is-vcentered is-mobile">
+                  <div class="column is-narrow"><input type="radio" /></div>
+                  <div class="column">
+                    <strong>CSC 364</strong>
+                    <p class="is-size-7">Front-End Development</p>
+                  </div>
+                  <div class="column is-narrow">3 cr</div>
+                </div>
+              </div>
+
+              <div class="box">
+                <div class="columns is-vcentered is-mobile">
+                  <div class="column is-narrow"><input type="radio" /></div>
+                  <div class="column">
+                    <strong>CSC 408</strong>
+                    <p class="is-size-7">Mobile & Cloud Applications</p>
+                  </div>
+                  <div class="column is-narrow">3 cr</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="box">
+          <h3 class="title is-5">Year 4</h3>
+          <div class="columns">
+            <div class="column">
+              <div class="columns is-vcentered mb-2">
+                <div class="column"><strong>Fall Semester</strong></div>
+                <div class="column is-narrow has-text-right">12 Credits</div>
+              </div>
+
+              <div class="box">
+                <div class="columns is-vcentered is-mobile">
+                  <div class="column is-narrow"><input type="radio" /></div>
+                  <div class="column">
+                    <strong>POL 352</strong>
+                    <p class="is-size-7">Great Issues in Politics</p>
+                  </div>
+                  <div class="column is-narrow">3 cr</div>
+                </div>
+              </div>
+
+              <div class="box">
+                <div class="columns is-vcentered is-mobile">
+                  <div class="column is-narrow"><input type="radio" /></div>
+                  <div class="column">
+                    <strong>CSC 483</strong>
+                    <p class="is-size-7">Senior Software Project</p>
+                  </div>
+                  <div class="column is-narrow">3 cr</div>
+                </div>
+              </div>
+
+              <div class="box">
+                <div class="columns is-vcentered is-mobile">
+                  <div class="column is-narrow"><input type="radio" /></div>
+                  <div class="column">
+                    <strong>Elective</strong>
+                  </div>
+                  <div class="column is-narrow">3 cr</div>
+                </div>
+              </div>
+
+              <div class="box">
+                <div class="columns is-vcentered is-mobile">
+                  <div class="column is-narrow"><input type="radio" /></div>
+                  <div class="column">
+                    <strong>Elective</strong>
+                  </div>
+                  <div class="column is-narrow">3 cr</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="column">
+              <div class="columns is-vcentered mb-2">
+                <div class="column"><strong>Spring Semester</strong></div>
+                <div class="column is-narrow has-text-right">11 Credits</div>
+              </div>
+
+              <div class="box">
+                <div class="columns is-vcentered is-mobile">
+                  <div class="column is-narrow"><input type="radio" /></div>
+                  <div class="column">
+                    <strong>CSC 311</strong>
+                    <p class="is-size-7">Cyber Ethics and Cyber Law</p>
+                  </div>
+                  <div class="column is-narrow">2 cr</div>
+                </div>
+              </div>
+
+              <div class="box">
+                <div class="columns is-vcentered is-mobile">
+                  <div class="column is-narrow"><input type="radio" /></div>
+                  <div class="column">
+                    <strong>CSC 484</strong>
+                    <p class="is-size-7">Senior Software Project</p>
+                  </div>
+                  <div class="column is-narrow">3 cr</div>
+                </div>
+              </div>
+
+              <div class="box">
+                <div class="columns is-vcentered is-mobile">
+                  <div class="column is-narrow"><input type="radio" /></div>
+                  <div class="column">
+                    <strong>CSC 441</strong>
+                    <p class="is-size-7">Project Management</p>
+                  </div>
+                  <div class="column is-narrow">3 cr</div>
+                </div>
+              </div>
+
+              <div class="box">
+                <div class="columns is-vcentered is-mobile">
+                  <div class="column is-narrow"><input type="radio" /></div>
+                  <div class="column">
+                    <strong>Elective</strong>
+                  </div>
+                  <div class="column is-narrow">3 cr</div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-
-      
-      <div class="box">
-        <h3 class="title is-5">Year 2</h3>
-        <div class="columns">
-
-          
-          <div class="column">
-            <div class="columns is-vcentered mb-2">
-              <div class="column"><strong>Fall Semester</strong></div>
-              <div class="column is-narrow has-text-right">6 Credits</div>
-            </div>
-
-            <div class="box">
-              <div class="columns is-vcentered is-mobile">
-                <div class="column is-narrow"><input type="radio" /></div>
-                <div class="column">
-                  <strong>CSC 205</strong>
-                  <p class="is-size-7">HCI Design & Programming</p>
-                </div>
-                <div class="column is-narrow">3 cr</div>
-              </div>
-            </div>
-
-            <div class="box">
-              <div class="columns is-vcentered is-mobile">
-                <div class="column is-narrow"><input type="radio" /></div>
-                <div class="column">
-                  <strong>CSC 363</strong>
-                  <p class="is-size-7">Database Systems</p>
-                </div>
-                <div class="column is-narrow">3 cr</div>
-              </div>
-            </div>
-          </div>
-
-        
-          <div class="column">
-            <div class="columns is-vcentered mb-2">
-              <div class="column"><strong>Spring Semester</strong></div>
-              <div class="column is-narrow has-text-right">7 Credits</div>
-            </div>
-
-            <div class="box">
-              <div class="columns is-vcentered is-mobile">
-                <div class="column is-narrow"><input type="radio" /></div>
-                <div class="column">
-                  <strong>CSC 206</strong>
-                  <p class="is-size-7">Web Programming</p>
-                </div>
-                <div class="column is-narrow">3 cr</div>
-              </div>
-            </div>
-
-            <div class="box">
-              <div class="columns is-vcentered is-mobile">
-                <div class="column is-narrow"><input type="radio" /></div>
-                <div class="column">
-                  <strong>CSC 251</strong>
-                  <p class="is-size-7">Networks & Security</p>
-                </div>
-                <div class="column is-narrow">4 cr</div>
-              </div>
-            </div>
-          </div>
-
-        </div>
-      </div>
-
-     
-      <div class="box">
-        <h3 class="title is-5">Year 3</h3>
-        <div class="columns">
-
-       
-          <div class="column">
-            <div class="columns is-vcentered mb-2">
-              <div class="column"><strong>Fall Semester</strong></div>
-              <div class="column is-narrow has-text-right">10 Credits</div>
-            </div>
-
-            <div class="box">
-              <div class="columns is-vcentered is-mobile">
-                <div class="column is-narrow"><input type="radio" /></div>
-                <div class="column">
-                  <strong>HUM 303</strong>
-                  <p class="is-size-7">Perspectives: Faith</p>
-                </div>
-                <div class="column is-narrow">3 cr</div>
-              </div>
-            </div>
-
-            <div class="box">
-              <div class="columns is-vcentered is-mobile">
-                <div class="column is-narrow"><input type="radio" /></div>
-                <div class="column">
-                  <strong>CSC 407</strong>
-                  <p class="is-size-7">Web Engineering</p>
-                </div>
-                <div class="column is-narrow">3 cr</div>
-              </div>
-            </div>
-
-            <div class="box">
-              <div class="columns is-vcentered is-mobile">
-                <div class="column is-narrow"><input type="radio" /></div>
-                <div class="column">
-                  <strong>CSC 425</strong>
-                  <p class="is-size-7">Op Sys & Architecture</p>
-                </div>
-                <div class="column is-narrow">3 cr</div>
-              </div>
-            </div>
-
-            <div class="box">
-              <div class="columns is-vcentered is-mobile">
-                <div class="column is-narrow"><input type="radio" /></div>
-                <div class="column">
-                  <strong>PED 103</strong>
-                  <p class="is-size-7">Physical Fitness</p>
-                </div>
-                <div class="column is-narrow">1 cr</div>
-              </div>
-            </div>
-          </div>
-
-        
-          <div class="column">
-            <div class="columns is-vcentered mb-2">
-              <div class="column"><strong>Spring Semester</strong></div>
-              <div class="column is-narrow has-text-right">15 Credits</div>
-            </div>
-
-            <div class="box">
-              <div class="columns is-vcentered is-mobile">
-                <div class="column is-narrow"><input type="radio" /></div>
-                <div class="column">
-                  <strong>BIB 300</strong>
-                  <p class="is-size-7">Foundations of Chr Thought</p>
-                </div>
-                <div class="column is-narrow">3 cr</div>
-              </div>
-            </div>
-
-            <div class="box">
-              <div class="columns is-vcentered is-mobile">
-                <div class="column is-narrow"><input type="radio" /></div>
-                <div class="column">
-                  <strong>CSC 203</strong>
-                  <p class="is-size-7">Software Engineering</p>
-                </div>
-                <div class="column is-narrow">3 cr</div>
-              </div>
-            </div>
-
-            <div class="box">
-              <div class="columns is-vcentered is-mobile">
-                <div class="column is-narrow"><input type="radio" /></div>
-                <div class="column">
-                  <strong>CSC 204</strong>
-                  <p class="is-size-7">Algorithms</p>
-                </div>
-                <div class="column is-narrow">3 cr</div>
-              </div>
-            </div>
-
-            <div class="box">
-              <div class="columns is-vcentered is-mobile">
-                <div class="column is-narrow"><input type="radio" /></div>
-                <div class="column">
-                  <strong>CSC 364</strong>
-                  <p class="is-size-7">Front-End Development</p>
-                </div>
-                <div class="column is-narrow">3 cr</div>
-              </div>
-            </div>
-
-            <div class="box">
-              <div class="columns is-vcentered is-mobile">
-                <div class="column is-narrow"><input type="radio" /></div>
-                <div class="column">
-                  <strong>CSC 408</strong>
-                  <p class="is-size-7">Mobile & Cloud Applications</p>
-                </div>
-                <div class="column is-narrow">3 cr</div>
-              </div>
-            </div>
-          </div>
-
-        </div>
-      </div>
-
-     
-      <div class="box">
-        <h3 class="title is-5">Year 4</h3>
-        <div class="columns">
-
-          
-          <div class="column">
-            <div class="columns is-vcentered mb-2">
-              <div class="column"><strong>Fall Semester</strong></div>
-              <div class="column is-narrow has-text-right">12 Credits</div>
-            </div>
-
-            <div class="box">
-              <div class="columns is-vcentered is-mobile">
-                <div class="column is-narrow"><input type="radio" /></div>
-                <div class="column">
-                  <strong>POL 352</strong>
-                  <p class="is-size-7">Great Issues in Politics</p>
-                </div>
-                <div class="column is-narrow">3 cr</div>
-              </div>
-            </div>
-
-            <div class="box">
-              <div class="columns is-vcentered is-mobile">
-                <div class="column is-narrow"><input type="radio" /></div>
-                <div class="column">
-                  <strong>CSC 483</strong>
-                  <p class="is-size-7">Senior Software Project</p>
-                </div>
-                <div class="column is-narrow">3 cr</div>
-              </div>
-            </div>
-
-            <div class="box">
-              <div class="columns is-vcentered is-mobile">
-                <div class="column is-narrow"><input type="radio" /></div>
-                <div class="column">
-                  <strong>Elective</strong>
-                </div>
-                <div class="column is-narrow">3 cr</div>
-              </div>
-            </div>
-
-            <div class="box">
-              <div class="columns is-vcentered is-mobile">
-                <div class="column is-narrow"><input type="radio" /></div>
-                <div class="column">
-                  <strong>Elective</strong>
-                </div>
-                <div class="column is-narrow">3 cr</div>
-              </div>
-            </div>
-          </div>
-
-         
-          <div class="column">
-            <div class="columns is-vcentered mb-2">
-              <div class="column"><strong>Spring Semester</strong></div>
-              <div class="column is-narrow has-text-right">11 Credits</div>
-            </div>
-
-            <div class="box">
-              <div class="columns is-vcentered is-mobile">
-                <div class="column is-narrow"><input type="radio" /></div>
-                <div class="column">
-                  <strong>CSC 311</strong>
-                  <p class="is-size-7">Cyber Ethics and Cyber Law</p>
-                </div>
-                <div class="column is-narrow">2 cr</div>
-              </div>
-            </div>
-
-            <div class="box">
-              <div class="columns is-vcentered is-mobile">
-                <div class="column is-narrow"><input type="radio" /></div>
-                <div class="column">
-                  <strong>CSC 484</strong>
-                  <p class="is-size-7">Senior Software Project</p>
-                </div>
-                <div class="column is-narrow">3 cr</div>
-              </div>
-            </div>
-
-            <div class="box">
-              <div class="columns is-vcentered is-mobile">
-                <div class="column is-narrow"><input type="radio" /></div>
-                <div class="column">
-                  <strong>CSC 441</strong>
-                  <p class="is-size-7">Project Management</p>
-                </div>
-                <div class="column is-narrow">3 cr</div>
-              </div>
-            </div>
-
-            <div class="box">
-              <div class="columns is-vcentered is-mobile">
-                <div class="column is-narrow"><input type="radio" /></div>
-                <div class="column">
-                  <strong>Elective</strong>
-                </div>
-                <div class="column is-narrow">3 cr</div>
-              </div>
-            </div>
-          </div>
-
-        </div>
-      </div>
-
-    </div>
-  </section>
-
-</body>
+    </section>
+  </body>
 </html>

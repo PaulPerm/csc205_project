@@ -1,0 +1,16 @@
+Login Page
+-Authentication
+
+Student page
+-Filtering
+-Populating from API 
+
+Check sheet page
+-Populate with courses from API
+-Print formatting
+-When you click on a class’s card its going to change color. Blue for enrolled, green for completed, and red for failed or dropped. 
+-Credits will add and progress bar will work when course is set to completed
+
+Build Mode page
+-Generate drop downs with major and minors from API. 
+-Have it save the changes for the student.
