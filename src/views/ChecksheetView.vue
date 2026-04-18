@@ -411,7 +411,7 @@ async function getStudentCourses() {
 
     console.log('Student courses:', response.data)
     console.log('First course:', response.data[0])
-    // Clear all semester arrays first
+
     transferCourses.value = []
     year1Fall.value = []
     year1Spring.value = []
@@ -422,11 +422,9 @@ async function getStudentCourses() {
     year4Fall.value = []
     year4Spring.value = []
 
-    // Organize courses into semesters
     for (let i = 0; i < response.data.length; i++) {
       const courseStudent = response.data[i]
 
-      // Add status and category info for display
       courseStudent.status = 'scheduled'
       courseStudent.statusLabel = 'Scheduled'
       courseStudent.category = 'major'

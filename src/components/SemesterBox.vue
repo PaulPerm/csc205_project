@@ -39,7 +39,6 @@
 import { computed } from 'vue'
 import CourseCard from './CourseCard.vue'
 
-// Define props
 const props = defineProps({
   semesterName: {
     type: String,
@@ -51,22 +50,20 @@ const props = defineProps({
   },
 })
 
-// Define emits
 const emit = defineEmits(['add-course', 'remove-course'])
 
-// Calculate total credits
 const totalCredits = computed(() => {
-  return props.courses.reduce((total, course) => {
-    return total + (course.credits || 0)
-  }, 0)
+  let total = 0
+  for (let i = 0; i < props.courses.length; i++) {
+    total += props.courses[i].credits || 0
+  }
+  return total
 })
 
-// Handle add course click
 function handleAddCourse() {
   emit('add-course')
 }
 
-// Handle remove course
 function handleRemoveCourse(course) {
   emit('remove-course', course)
 }

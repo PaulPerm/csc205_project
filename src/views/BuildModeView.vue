@@ -492,6 +492,10 @@ const fetchAvailableCourses = async () => {
         semesterOk = true
       } else if (course.semester_id === targetSemesterId) {
         semesterOk = true
+      } else if (targetSemesterId === 1 && (course.semester_id === 4 || course.semester_id === 5)) {
+        semesterOk = true
+      } else if (targetSemesterId === 2 && (course.semester_id === 6 || course.semester_id === 7)) {
+        semesterOk = true
       }
 
       if (prereqCheck.canAdd && semesterOk) {
