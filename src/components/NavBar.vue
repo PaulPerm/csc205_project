@@ -24,7 +24,6 @@
     </div>
   </nav>
 
-  <!-- Change Password Modal -->
   <div class="modal" :class="{ 'is-active': showPasswordModal }">
     <div class="modal-background" @click="closePasswordModal"></div>
     <div class="modal-card">
@@ -127,7 +126,7 @@ const closeDropdown = () => {
 const openChangePassword = () => {
   showPasswordModal.value = true
   closeDropdown()
-  // Reset form
+
   passwordForm.value = {
     currentPassword: '',
     newPassword: '',
@@ -145,7 +144,6 @@ const handleChangePassword = async () => {
   passwordError.value = ''
   passwordSuccess.value = ''
 
-  // Validation
   if (passwordForm.value.newPassword !== passwordForm.value.confirmPassword) {
     passwordError.value = 'New passwords do not match'
     return
@@ -159,7 +157,6 @@ const handleChangePassword = async () => {
   isChangingPassword.value = true
 
   try {
-    // Make API call
     const response = await axios.put(
       'https://checksheets.cscprof.com/auth/passwordreset',
       {
@@ -176,7 +173,6 @@ const handleChangePassword = async () => {
     console.log('Success:', response)
     passwordSuccess.value = 'Password changed successfully!'
 
-    // Close modal after a brief delay
     setTimeout(() => {
       closePasswordModal()
     }, 1500)
@@ -208,22 +204,6 @@ const logout = async () => {
     closeDropdown()
   }
 }
-
-// // Close dropdown when clicking outside
-// const handleClickOutside = (event: MouseEvent) => {
-//   const dropdown = document.querySelector('.navbar-item.has-dropdown')
-//   if (dropdown && !dropdown.contains(event.target as Node)) {
-//     closeDropdown()
-//   }
-// }
-
-// onMounted(() => {
-//   document.addEventListener('click', handleClickOutside)
-// })
-
-// onUnmounted(() => {
-//   document.removeEventListener('click', handleClickOutside)
-// })
 </script>
 
 <style scoped>

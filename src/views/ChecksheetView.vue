@@ -4,9 +4,12 @@
 
     <section class="section">
       <div class="container">
-        <!-- Student Info Box -->
         <div class="box">
-          <h2 class="title is-4">{{ student.name }} — {{ student.major }}</h2>
+          <h2 class="title is-4" v-if="student">
+            {{ student.lastname }}, {{ student.firstname }} —
+            {{ student.majors.length > 0 ? student.majors[0].major_name : 'No major assigned' }}
+          </h2>
+          <h2 class="title is-4" v-else>Loading...</h2>
           <p class="subtitle is-6">Four-Year Academic Plan</p>
 
           <div class="tags">
@@ -30,7 +33,6 @@
           </div>
         </div>
 
-        <!-- Metrics Box -->
         <div class="box">
           <h3 class="title is-5">Metrics</h3>
           <div class="columns">
@@ -49,60 +51,267 @@
           </div>
         </div>
 
-        <!-- Year Boxes -->
-        <div v-for="year in years" :key="year.number" class="box">
-          <h3 class="title is-5">Year {{ year.number }}</h3>
+        <div v-if="transferCourses.length > 0" class="box">
+          <h3 class="title is-5"><i class="fas fa-exchange-alt"></i> Transfer Credits</h3>
+          <div class="columns is-vcentered mb-2">
+            <div class="column"><strong>Transfer Courses</strong></div>
+            <div class="column is-narrow has-text-right">
+              {{ calculateCredits(transferCourses) }} Credits
+            </div>
+          </div>
+
+          <div
+            v-for="course in transferCourses"
+            :key="course.course_student_id"
+            class="box course-card"
+          >
+            <div class="columns is-vcentered is-mobile">
+              <div class="column">
+                <strong>{{ course.course.course_code }}</strong> - {{ course.course.course_name }}
+                <div class="is-size-7 has-text-grey mt-1">{{ course.course.credits }} credits</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="box">
+          <h3 class="title is-5">Year 1</h3>
           <div class="columns">
-            <!-- Fall Semester -->
             <div class="column">
               <div class="columns is-vcentered mb-2">
                 <div class="column"><strong>Fall Semester</strong></div>
                 <div class="column is-narrow has-text-right">
-                  {{ year.fall.totalCredits }} Credits
+                  {{ calculateCredits(year1Fall) }} Credits
                 </div>
               </div>
 
-              <div v-for="course in year.fall.courses" :key="course.id" class="box">
+              <div v-if="year1Fall.length === 0" class="has-text-grey has-text-centered py-4">
+                No courses scheduled
+              </div>
+              <div
+                v-for="course in year1Fall"
+                :key="course.course_student_id"
+                class="box course-card"
+              >
                 <div class="columns is-vcentered is-mobile">
-                  <div class="column is-narrow">
-                    <input
-                      type="radio"
-                      :name="`course-${course.id}`"
-                      :checked="course.status === 'completed'"
-                    />
-                  </div>
                   <div class="column">
-                    <strong>{{ course.code }}</strong>
-                    <p class="is-size-7">{{ course.name }}</p>
+                    <strong>{{ course.course.course_code }}</strong> -
+                    {{ course.course.course_name }}
+                    <div class="is-size-7 has-text-grey mt-1">
+                      {{ course.course.credits }} credits
+                    </div>
                   </div>
-                  <div class="column is-narrow">{{ course.credits }} cr</div>
                 </div>
               </div>
             </div>
 
-            <!-- Spring Semester -->
             <div class="column">
               <div class="columns is-vcentered mb-2">
                 <div class="column"><strong>Spring Semester</strong></div>
                 <div class="column is-narrow has-text-right">
-                  {{ year.spring.totalCredits }} Credits
+                  {{ calculateCredits(year1Spring) }} Credits
                 </div>
               </div>
 
-              <div v-for="course in year.spring.courses" :key="course.id" class="box">
+              <div v-if="year1Spring.length === 0" class="has-text-grey has-text-centered py-4">
+                No courses scheduled
+              </div>
+              <div
+                v-for="course in year1Spring"
+                :key="course.course_student_id"
+                class="box course-card"
+              >
                 <div class="columns is-vcentered is-mobile">
-                  <div class="column is-narrow">
-                    <input
-                      type="radio"
-                      :name="`course-${course.id}`"
-                      :checked="course.status === 'completed'"
-                    />
-                  </div>
                   <div class="column">
-                    <strong>{{ course.code }}</strong>
-                    <p v-if="course.name" class="is-size-7">{{ course.name }}</p>
+                    <strong>{{ course.course.course_code }}</strong> -
+                    {{ course.course.course_name }}
+                    <div class="is-size-7 has-text-grey mt-1">
+                      {{ course.course.credits }} credits
+                    </div>
                   </div>
-                  <div class="column is-narrow">{{ course.credits }} cr</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="box">
+          <h3 class="title is-5">Year 2</h3>
+          <div class="columns">
+            <div class="column">
+              <div class="columns is-vcentered mb-2">
+                <div class="column"><strong>Fall Semester</strong></div>
+                <div class="column is-narrow has-text-right">
+                  {{ calculateCredits(year2Fall) }} Credits
+                </div>
+              </div>
+
+              <div v-if="year2Fall.length === 0" class="has-text-grey has-text-centered py-4">
+                No courses scheduled
+              </div>
+              <div
+                v-for="course in year2Fall"
+                :key="course.course_student_id"
+                class="box course-card"
+              >
+                <div class="columns is-vcentered is-mobile">
+                  <div class="column">
+                    <strong>{{ course.course.course_code }}</strong> -
+                    {{ course.course.course_name }}
+                    <div class="is-size-7 has-text-grey mt-1">
+                      {{ course.course.credits }} credits
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="column">
+              <div class="columns is-vcentered mb-2">
+                <div class="column"><strong>Spring Semester</strong></div>
+                <div class="column is-narrow has-text-right">
+                  {{ calculateCredits(year2Spring) }} Credits
+                </div>
+              </div>
+
+              <div v-if="year2Spring.length === 0" class="has-text-grey has-text-centered py-4">
+                No courses scheduled
+              </div>
+              <div
+                v-for="course in year2Spring"
+                :key="course.course_student_id"
+                class="box course-card"
+              >
+                <div class="columns is-vcentered is-mobile">
+                  <div class="column">
+                    <strong>{{ course.course.course_code }}</strong> -
+                    {{ course.course.course_name }}
+                    <div class="is-size-7 has-text-grey mt-1">
+                      {{ course.course.credits }} credits
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="box">
+          <h3 class="title is-5">Year 3</h3>
+          <div class="columns">
+            <div class="column">
+              <div class="columns is-vcentered mb-2">
+                <div class="column"><strong>Fall Semester</strong></div>
+                <div class="column is-narrow has-text-right">
+                  {{ calculateCredits(year3Fall) }} Credits
+                </div>
+              </div>
+
+              <div v-if="year3Fall.length === 0" class="has-text-grey has-text-centered py-4">
+                No courses scheduled
+              </div>
+              <div
+                v-for="course in year3Fall"
+                :key="course.course_student_id"
+                class="box course-card"
+              >
+                <div class="columns is-vcentered is-mobile">
+                  <div class="column">
+                    <strong>{{ course.course.course_code }}</strong> -
+                    {{ course.course.course_name }}
+                    <div class="is-size-7 has-text-grey mt-1">
+                      {{ course.course.credits }} credits
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="column">
+              <div class="columns is-vcentered mb-2">
+                <div class="column"><strong>Spring Semester</strong></div>
+                <div class="column is-narrow has-text-right">
+                  {{ calculateCredits(year3Spring) }} Credits
+                </div>
+              </div>
+
+              <div v-if="year3Spring.length === 0" class="has-text-grey has-text-centered py-4">
+                No courses scheduled
+              </div>
+              <div
+                v-for="course in year3Spring"
+                :key="course.course_student_id"
+                class="box course-card"
+              >
+                <div class="columns is-vcentered is-mobile">
+                  <div class="column">
+                    <strong>{{ course.course.course_code }}</strong> -
+                    {{ course.course.course_name }}
+                    <div class="is-size-7 has-text-grey mt-1">
+                      {{ course.course.credits }} credits
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="box">
+          <h3 class="title is-5">Year 4</h3>
+          <div class="columns">
+            <div class="column">
+              <div class="columns is-vcentered mb-2">
+                <div class="column"><strong>Fall Semester</strong></div>
+                <div class="column is-narrow has-text-right">
+                  {{ calculateCredits(year4Fall) }} Credits
+                </div>
+              </div>
+
+              <div v-if="year4Fall.length === 0" class="has-text-grey has-text-centered py-4">
+                No courses scheduled
+              </div>
+              <div
+                v-for="course in year4Fall"
+                :key="course.course_student_id"
+                class="box course-card"
+              >
+                <div class="columns is-vcentered is-mobile">
+                  <div class="column">
+                    <strong>{{ course.course.course_code }}</strong> -
+                    {{ course.course.course_name }}
+                    <div class="is-size-7 has-text-grey mt-1">
+                      {{ course.course.credits }} credits
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="column">
+              <div class="columns is-vcentered mb-2">
+                <div class="column"><strong>Spring Semester</strong></div>
+                <div class="column is-narrow has-text-right">
+                  {{ calculateCredits(year4Spring) }} Credits
+                </div>
+              </div>
+
+              <div v-if="year4Spring.length === 0" class="has-text-grey has-text-centered py-4">
+                No courses scheduled
+              </div>
+              <div
+                v-for="course in year4Spring"
+                :key="course.course_student_id"
+                class="box course-card"
+              >
+                <div class="columns is-vcentered is-mobile">
+                  <div class="column">
+                    <strong>{{ course.course.course_code }}</strong> -
+                    {{ course.course.course_name }}
+                    <div class="is-size-7 has-text-grey mt-1">
+                      {{ course.course.credits }} credits
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -114,21 +323,44 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed } from 'vue'
+import { ref, computed, onMounted } from 'vue'
 import { useRoute } from 'vue-router'
+import axios from 'axios'
 import NavBar from '@/components/NavBar.vue'
 
 const route = useRoute()
-const studentId = route.params.id as string
+const studentId = route.params.id
 
-// Mock student data (will be replaced with API calls later)
-const student = ref({
-  name: 'John Stevens',
-  major: 'Computer Science: Data Science',
-})
+const student = ref(null)
+const error = ref(null)
+
+const transferCourses = ref([])
+const year1Fall = ref([])
+const year1Spring = ref([])
+const year2Fall = ref([])
+const year2Spring = ref([])
+const year3Fall = ref([])
+const year3Spring = ref([])
+const year4Fall = ref([])
+const year4Spring = ref([])
 
 const totalCredits = ref(121)
-const creditsEarned = ref(0)
+
+const creditsEarned = computed(() => {
+  let total = 0
+
+  transferCourses.value.forEach((c) => (total += c.course.credits || 0))
+  year1Fall.value.forEach((c) => (total += c.course.credits || 0))
+  year1Spring.value.forEach((c) => (total += c.course.credits || 0))
+  year2Fall.value.forEach((c) => (total += c.course.credits || 0))
+  year2Spring.value.forEach((c) => (total += c.course.credits || 0))
+  year3Fall.value.forEach((c) => (total += c.course.credits || 0))
+  year3Spring.value.forEach((c) => (total += c.course.credits || 0))
+  year4Fall.value.forEach((c) => (total += c.course.credits || 0))
+  year4Spring.value.forEach((c) => (total += c.course.credits || 0))
+
+  return total
+})
 
 const progressPercentage = computed(() =>
   Math.round((creditsEarned.value / totalCredits.value) * 100),
@@ -140,236 +372,106 @@ const metrics = computed(() => ({
   remaining: totalCredits.value - creditsEarned.value,
 }))
 
-// Mock course data structure
-const years = ref([
-  {
-    number: 1,
-    fall: {
-      totalCredits: 14,
-      courses: [
-        {
-          id: 'csc110-f1',
-          code: 'CSC 110',
-          name: 'Introduction to Computer Science',
-          credits: 3,
-          status: 'scheduled',
-        },
-        { id: 'mat151-f1', code: 'MAT 151', name: 'Calculus I', credits: 4, status: 'scheduled' },
-        {
-          id: 'eng101-f1',
-          code: 'ENG 101',
-          name: 'English Composition I',
-          credits: 3,
-          status: 'scheduled',
-        },
-        {
-          id: 'gen101-f1',
-          code: 'GEN 101',
-          name: 'First Year Seminar',
-          credits: 1,
-          status: 'scheduled',
-        },
-        {
-          id: 'bib101-f1',
-          code: 'BIB 101',
-          name: 'Old Testament Survey',
-          credits: 3,
-          status: 'scheduled',
-        },
-      ],
-    },
-    spring: {
-      totalCredits: 17,
-      courses: [
-        {
-          id: 'csc120-s1',
-          code: 'CSC 120',
-          name: 'Programming I',
-          credits: 3,
-          status: 'scheduled',
-        },
-        { id: 'mat152-s1', code: 'MAT 152', name: 'Calculus II', credits: 4, status: 'scheduled' },
-        {
-          id: 'eng102-s1',
-          code: 'ENG 102',
-          name: 'English Composition II',
-          credits: 3,
-          status: 'scheduled',
-        },
-        { id: 'phy211-s1', code: 'PHY 211', name: 'Physics I', credits: 4, status: 'scheduled' },
-        {
-          id: 'bib102-s1',
-          code: 'BIB 102',
-          name: 'New Testament Survey',
-          credits: 3,
-          status: 'scheduled',
-        },
-      ],
-    },
-  },
-  {
-    number: 2,
-    fall: {
-      totalCredits: 6,
-      courses: [
-        {
-          id: 'csc205-f2',
-          code: 'CSC 205',
-          name: 'HCI Design & Programming',
-          credits: 3,
-          status: 'scheduled',
-        },
-        {
-          id: 'csc363-f2',
-          code: 'CSC 363',
-          name: 'Database Systems',
-          credits: 3,
-          status: 'scheduled',
-        },
-      ],
-    },
-    spring: {
-      totalCredits: 7,
-      courses: [
-        {
-          id: 'csc206-s2',
-          code: 'CSC 206',
-          name: 'Web Programming',
-          credits: 3,
-          status: 'scheduled',
-        },
-        {
-          id: 'csc251-s2',
-          code: 'CSC 251',
-          name: 'Networks & Security',
-          credits: 4,
-          status: 'scheduled',
-        },
-      ],
-    },
-  },
-  {
-    number: 3,
-    fall: {
-      totalCredits: 10,
-      courses: [
-        {
-          id: 'hum303-f3',
-          code: 'HUM 303',
-          name: 'Perspectives: Faith',
-          credits: 3,
-          status: 'scheduled',
-        },
-        {
-          id: 'csc407-f3',
-          code: 'CSC 407',
-          name: 'Web Engineering',
-          credits: 3,
-          status: 'scheduled',
-        },
-        {
-          id: 'csc425-f3',
-          code: 'CSC 425',
-          name: 'Op Sys & Architecture',
-          credits: 3,
-          status: 'scheduled',
-        },
-        {
-          id: 'ped103-f3',
-          code: 'PED 103',
-          name: 'Physical Fitness',
-          credits: 1,
-          status: 'scheduled',
-        },
-      ],
-    },
-    spring: {
-      totalCredits: 15,
-      courses: [
-        {
-          id: 'bib300-s3',
-          code: 'BIB 300',
-          name: 'Foundations of Chr Thought',
-          credits: 3,
-          status: 'scheduled',
-        },
-        {
-          id: 'csc203-s3',
-          code: 'CSC 203',
-          name: 'Software Engineering',
-          credits: 3,
-          status: 'scheduled',
-        },
-        { id: 'csc204-s3', code: 'CSC 204', name: 'Algorithms', credits: 3, status: 'scheduled' },
-        {
-          id: 'csc364-s3',
-          code: 'CSC 364',
-          name: 'Front-End Development',
-          credits: 3,
-          status: 'scheduled',
-        },
-        {
-          id: 'csc408-s3',
-          code: 'CSC 408',
-          name: 'Mobile & Cloud Applications',
-          credits: 3,
-          status: 'scheduled',
-        },
-      ],
-    },
-  },
-  {
-    number: 4,
-    fall: {
-      totalCredits: 12,
-      courses: [
-        {
-          id: 'pol352-f4',
-          code: 'POL 352',
-          name: 'Great Issues in Politics',
-          credits: 3,
-          status: 'scheduled',
-        },
-        {
-          id: 'csc483-f4',
-          code: 'CSC 483',
-          name: 'Senior Software Project',
-          credits: 3,
-          status: 'scheduled',
-        },
-        { id: 'elec1-f4', code: 'Elective', name: '', credits: 3, status: 'scheduled' },
-        { id: 'elec2-f4', code: 'Elective', name: '', credits: 3, status: 'scheduled' },
-      ],
-    },
-    spring: {
-      totalCredits: 11,
-      courses: [
-        {
-          id: 'csc311-s4',
-          code: 'CSC 311',
-          name: 'Cyber Ethics and Cyber Law',
-          credits: 2,
-          status: 'scheduled',
-        },
-        {
-          id: 'csc484-s4',
-          code: 'CSC 484',
-          name: 'Senior Software Project',
-          credits: 3,
-          status: 'scheduled',
-        },
-        {
-          id: 'csc441-s4',
-          code: 'CSC 441',
-          name: 'Project Management',
-          credits: 3,
-          status: 'scheduled',
-        },
-        { id: 'elec3-s4', code: 'Elective', name: '', credits: 3, status: 'scheduled' },
-      ],
-    },
-  },
-])
+const calculateCredits = (courses) => {
+  let total = 0
+  for (let i = 0; i < courses.length; i++) {
+    total += courses[i].course.credits || 0
+  }
+  return total
+}
+
+async function getStudent() {
+  try {
+    const response = await axios.get('https://checksheets.cscprof.com/students', {
+      headers: {
+        'x-token': localStorage.getItem('authToken') || '',
+      },
+    })
+
+    const students = response.data
+    student.value = students.find((s) => s.student_id === parseInt(studentId))
+
+    console.log('Student data:', student.value)
+  } catch (err) {
+    error.value = err
+    console.error('Error fetching student:', err)
+  }
+}
+
+async function getStudentCourses() {
+  try {
+    const response = await axios.get('https://checksheets.cscprof.com/studentcourses', {
+      headers: {
+        'x-token': localStorage.getItem('authToken') || '',
+      },
+      params: {
+        student_id: studentId,
+      },
+    })
+
+    console.log('Student courses:', response.data)
+    console.log('First course:', response.data[0])
+    // Clear all semester arrays first
+    transferCourses.value = []
+    year1Fall.value = []
+    year1Spring.value = []
+    year2Fall.value = []
+    year2Spring.value = []
+    year3Fall.value = []
+    year3Spring.value = []
+    year4Fall.value = []
+    year4Spring.value = []
+
+    // Organize courses into semesters
+    for (let i = 0; i < response.data.length; i++) {
+      const courseStudent = response.data[i]
+
+      // Add status and category info for display
+      courseStudent.status = 'scheduled'
+      courseStudent.statusLabel = 'Scheduled'
+      courseStudent.category = 'major'
+      courseStudent.categoryLabel = 'Major'
+
+      const year = courseStudent.year
+      const semesterId = courseStudent.semester_id
+
+      if (year === 1) {
+        if (semesterId === 1) {
+          year1Fall.value.push(courseStudent)
+        } else {
+          year1Spring.value.push(courseStudent)
+        }
+      } else if (year === 2) {
+        if (semesterId === 1) {
+          year2Fall.value.push(courseStudent)
+        } else {
+          year2Spring.value.push(courseStudent)
+        }
+      } else if (year === 3) {
+        if (semesterId === 1) {
+          year3Fall.value.push(courseStudent)
+        } else {
+          year3Spring.value.push(courseStudent)
+        }
+      } else if (year === 4) {
+        if (semesterId === 1) {
+          year4Fall.value.push(courseStudent)
+        } else {
+          year4Spring.value.push(courseStudent)
+        }
+      } else {
+        transferCourses.value.push(courseStudent)
+      }
+    }
+  } catch (err) {
+    error.value = err
+    console.error('Error fetching courses:', err)
+  }
+}
+onMounted(() => {
+  getStudent()
+  getStudentCourses()
+})
 
 const printChecksheet = () => {
   window.print()
@@ -384,6 +486,10 @@ const printChecksheet = () => {
 .box {
   background-color: whitesmoke;
   box-shadow: 0 2px 8px rgba(105, 98, 157, 0.4);
+}
+
+.course-card {
+  background-color: white;
 }
 
 .progress {

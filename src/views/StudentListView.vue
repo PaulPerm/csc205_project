@@ -4,7 +4,6 @@
 
     <section class="section">
       <div class="container">
-        <!-- Header -->
         <div class="columns is-vcentered mb-4">
           <div class="column">
             <h2 class="title is-4">Students</h2>
@@ -16,7 +15,6 @@
           </div>
         </div>
 
-        <!-- Controls -->
         <div class="columns mb-4">
           <div class="column">
             <div class="control">
@@ -50,13 +48,12 @@
           </div>
         </div>
 
-        <!-- Student List -->
         <div v-for="student in filteredStudents" :key="student.student_id" class="box">
           <div class="columns is-vcentered">
             <div class="column">
               <strong>{{ student.lastname }}, {{ student.firstname }}</strong>
               <p class="is-size-7">
-                {{ student.majors.length > 0 ? student.majors[0] : 'No major assigned' }}
+                {{ student.majors.length > 0 ? student.majors[0].major_name : 'No major assigned' }}
               </p>
             </div>
             <div class="column is-narrow">{{ student.credits.length }} credits</div>
@@ -116,33 +113,6 @@
                 />
               </div>
             </div>
-
-            <!-- <div class="field">
-              <label class="label">Major</label>
-              <div class="control">
-                <div class="select is-fullwidth">
-                  <select v-model="newStudent.major" required>
-                    <option value="">Select major</option>
-                    <option value="Computer Science">Computer Science</option>
-                    <option value="Cybersecurity">Cybersecurity</option>
-                    <option value="Data Science">Data Science</option>
-                  </select>
-                </div>
-              </div>
-            </div>
-
-            <div class="field">
-              <label class="label">Minor (Optional)</label>
-              <div class="control">
-                <div class="select is-fullwidth">
-                  <select v-model="newStudent.minor">
-                    <option value="">No minor</option>
-                    <option value="Software Development">Software Development</option>
-                    <option value="Data Science">Data Science</option>
-                  </select>
-                </div>
-              </div>
-            </div> -->
 
             <div v-if="addStudentError" class="notification is-danger is-light">
               {{ addStudentError }}
