@@ -189,6 +189,7 @@ import axios from 'axios'
 import NavBar from '@/components/NavBar.vue'
 import SemesterBox from '@/components/SemesterBox.vue'
 import CourseSelectionModal from '@/components/CourseSelectionModal.vue'
+import { parse } from 'node:path'
 
 const route = useRoute()
 const router = useRouter()
@@ -358,14 +359,15 @@ const getCoreCourses = async () => {
 
 const getStudentCourses = async () => {
   try {
-    const response = await axios.get('https://checksheets.cscprof.com/studentcourses', {
-      headers: {
-        'x-token': localStorage.getItem('authToken') || '',
+    const response = await axios.get(
+      `https://checksheets.cscprof.com/studentcourses/${studentId}`,
+      {
+        headers: {
+          'x-token': localStorage.getItem('authToken') || '',
+        },
       },
-      params: {
-        student_id: studentId,
-      },
-    })
+    )
+
     console.log('Student courses:', response.data)
 
     transferCourses.value = []
@@ -652,21 +654,11 @@ const removeCourse = async (course) => {
   }
 
   try {
-    const response = await axios.put(
-      'https://checksheets.cscprof.com/studentcourses',
-      {
-        course_student_id: course.course_student_id,
-        student_id: null,
-        course_id: null,
-        semester_id: null,
-        year: null,
-        course_status_id: null,
-        grade: null,
-      },
+    const response = await axios.delete(
+      `https://checksheets.cscprof.com/studentcourses/${course.course_student_id}`,
       {
         headers: {
           'x-token': localStorage.getItem('authToken') || '',
-          'Content-Type': 'application/json',
         },
       },
     )

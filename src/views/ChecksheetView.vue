@@ -19,11 +19,6 @@
             <strong class="ml-auto">{{ creditsEarned }} / {{ totalCredits }} Credits Earned</strong>
           </div>
 
-          <p class="mt-3"><strong>Overall Progress</strong></p>
-          <progress class="progress" :value="creditsEarned" :max="totalCredits">
-            {{ progressPercentage }}%
-          </progress>
-
           <div class="buttons mt-3">
             <router-link :to="`/build/${studentId}`" class="button is-primary">
               Enter Build Mode
@@ -49,6 +44,46 @@
               <p class="title">{{ metrics.remaining }}</p>
             </div>
           </div>
+          <p class="mt-3"><strong>Overall Progress</strong></p>
+          <div class="progress-container">
+            <div class="progress-bar">
+              <div
+                class="progressChunk major"
+                :style="{ width: creditBreakdown.majorPercent + '%' }"
+              ></div>
+              <div
+                class="progressChunk minor"
+                :style="{ width: creditBreakdown.minorPercent + '%' }"
+              ></div>
+              <div
+                class="progressChunk core"
+                :style="{ width: creditBreakdown.corePercent + '%' }"
+              ></div>
+              <div
+                class="progressChunk elective"
+                :style="{ width: creditBreakdown.electivePercent + '%' }"
+              ></div>
+            </div>
+            <div class="progress-label">{{ creditsEarned }} / {{ totalCredits }} Credits</div>
+          </div>
+          <div class="category-legend">
+            <span class="legend-item">
+              <span class="legend-color major"></span>
+              Major: {{ creditBreakdown.major }} credits
+            </span>
+            <span class="legend-item">
+              <span class="legend-color minor"></span>
+              Minor: {{ creditBreakdown.minor }} credits
+            </span>
+            <span class="legend-item">
+              <span class="legend-color core"></span>
+              Core: {{ creditBreakdown.core }} credits
+            </span>
+            <span class="legend-item">
+              <span class="legend-color elective"></span>
+              Elective: {{ creditBreakdown.elective }} credits
+            </span>
+          </div>
         </div>
 
         <div v-if="transferCourses.length > 0" class="box">
@@ -68,6 +103,9 @@
             <div class="columns is-vcentered is-mobile">
               <div class="column">
                 <strong>{{ course.course.course_code }}</strong> - {{ course.course.course_name }}
+                <span class="category-badge" :class="`category-${course.category}`">
+                  {{ course.categoryLabel }}
+                </span>
                 <div class="is-size-7 has-text-grey mt-1">{{ course.course.credits }} credits</div>
               </div>
             </div>
@@ -97,6 +135,9 @@
                   <div class="column">
                     <strong>{{ course.course.course_code }}</strong> -
                     {{ course.course.course_name }}
+                    <span class="category-badge" :class="`category-${course.category}`">
+                      {{ course.categoryLabel }}
+                    </span>
                     <div class="is-size-7 has-text-grey mt-1">
                       {{ course.course.credits }} credits
                     </div>
@@ -125,6 +166,9 @@
                   <div class="column">
                     <strong>{{ course.course.course_code }}</strong> -
                     {{ course.course.course_name }}
+                    <span class="category-badge" :class="`category-${course.category}`">
+                      {{ course.categoryLabel }}
+                    </span>
                     <div class="is-size-7 has-text-grey mt-1">
                       {{ course.course.credits }} credits
                     </div>
@@ -158,6 +202,9 @@
                   <div class="column">
                     <strong>{{ course.course.course_code }}</strong> -
                     {{ course.course.course_name }}
+                    <span class="category-badge" :class="`category-${course.category}`">
+                      {{ course.categoryLabel }}
+                    </span>
                     <div class="is-size-7 has-text-grey mt-1">
                       {{ course.course.credits }} credits
                     </div>
@@ -186,6 +233,9 @@
                   <div class="column">
                     <strong>{{ course.course.course_code }}</strong> -
                     {{ course.course.course_name }}
+                    <span class="category-badge" :class="`category-${course.category}`">
+                      {{ course.categoryLabel }}
+                    </span>
                     <div class="is-size-7 has-text-grey mt-1">
                       {{ course.course.credits }} credits
                     </div>
@@ -219,6 +269,9 @@
                   <div class="column">
                     <strong>{{ course.course.course_code }}</strong> -
                     {{ course.course.course_name }}
+                    <span class="category-badge" :class="`category-${course.category}`">
+                      {{ course.categoryLabel }}
+                    </span>
                     <div class="is-size-7 has-text-grey mt-1">
                       {{ course.course.credits }} credits
                     </div>
@@ -247,6 +300,9 @@
                   <div class="column">
                     <strong>{{ course.course.course_code }}</strong> -
                     {{ course.course.course_name }}
+                    <span class="category-badge" :class="`category-${course.category}`">
+                      {{ course.categoryLabel }}
+                    </span>
                     <div class="is-size-7 has-text-grey mt-1">
                       {{ course.course.credits }} credits
                     </div>
@@ -280,6 +336,9 @@
                   <div class="column">
                     <strong>{{ course.course.course_code }}</strong> -
                     {{ course.course.course_name }}
+                    <span class="category-badge" :class="`category-${course.category}`">
+                      {{ course.categoryLabel }}
+                    </span>
                     <div class="is-size-7 has-text-grey mt-1">
                       {{ course.course.credits }} credits
                     </div>
@@ -308,6 +367,9 @@
                   <div class="column">
                     <strong>{{ course.course.course_code }}</strong> -
                     {{ course.course.course_name }}
+                    <span class="category-badge" :class="`category-${course.category}`">
+                      {{ course.categoryLabel }}
+                    </span>
                     <div class="is-size-7 has-text-grey mt-1">
                       {{ course.course.credits }} credits
                     </div>
@@ -344,6 +406,10 @@ const year3Spring = ref([])
 const year4Fall = ref([])
 const year4Spring = ref([])
 
+const majorCourses = ref([])
+const minorCourses = ref([])
+const coreCourses = ref([])
+
 const totalCredits = ref(121)
 
 const creditsEarned = computed(() => {
@@ -362,10 +428,82 @@ const creditsEarned = computed(() => {
   return total
 })
 
-const progressPercentage = computed(() =>
-  Math.round((creditsEarned.value / totalCredits.value) * 100),
-)
+const getMajorCourses = async () => {
+  if (!student.value || !student.value.majors[0]) {
+    return
+  }
 
+  try {
+    const response = await axios.get(
+      `https://checksheets.cscprof.com/courses/major/${student.value.majors[0].major_id}`,
+      {
+        headers: {
+          'x-token': localStorage.getItem('authToken') || '',
+        },
+      },
+    )
+    majorCourses.value = response.data
+  } catch (error) {
+    console.error('Error fetching major courses:', error)
+  }
+}
+
+const getMinorCourses = async () => {
+  if (!student.value || !student.value.minors[0]) {
+    return
+  }
+
+  try {
+    const response = await axios.get(
+      `https://checksheets.cscprof.com/courses/minor/${student.value.minors[0].minor_id}`,
+      {
+        headers: {
+          'x-token': localStorage.getItem('authToken') || '',
+        },
+      },
+    )
+    minorCourses.value = response.data
+  } catch (error) {
+    console.error('Error fetching minor courses:', error)
+  }
+}
+
+const getCoreCourses = async () => {
+  try {
+    const response = await axios.get('https://checksheets.cscprof.com/courses/core/prereqs', {
+      headers: {
+        'x-token': localStorage.getItem('authToken') || '',
+      },
+    })
+    coreCourses.value = response.data
+  } catch (error) {
+    console.error('Error fetching core courses:', error)
+  }
+}
+
+const getCourseCategory = (courseId) => {
+  if (majorCourses.value.length > 0) {
+    const majorCourseIds = majorCourses.value[0].courses.map((c) => c.course_id)
+    if (majorCourseIds.includes(courseId)) {
+      return { category: 'major', categoryLabel: 'Major' }
+    }
+  }
+
+  if (minorCourses.value.length > 0) {
+    const minorCourseIds = minorCourses.value[0].courses.map((c) => c.course_id)
+    if (minorCourseIds.includes(courseId)) {
+      return { category: 'minor', categoryLabel: 'Minor' }
+    }
+  }
+
+  for (let i = 0; i < coreCourses.value.length; i++) {
+    if (coreCourses.value[i].course_id === courseId) {
+      return { category: 'core', categoryLabel: 'Core' }
+    }
+  }
+
+  return { category: 'elective', categoryLabel: 'Elective' }
+}
 const metrics = computed(() => ({
   completed: creditsEarned.value,
   enrolled: 0,
@@ -398,16 +536,16 @@ async function getStudent() {
   }
 }
 
-async function getStudentCourses() {
+const getStudentCourses = async () => {
   try {
-    const response = await axios.get('https://checksheets.cscprof.com/studentcourses', {
-      headers: {
-        'x-token': localStorage.getItem('authToken') || '',
+    const response = await axios.get(
+      `https://checksheets.cscprof.com/studentcourses/${studentId}`,
+      {
+        headers: {
+          'x-token': localStorage.getItem('authToken') || '',
+        },
       },
-      params: {
-        student_id: studentId,
-      },
-    })
+    )
 
     console.log('Student courses:', response.data)
     console.log('First course:', response.data[0])
@@ -427,8 +565,10 @@ async function getStudentCourses() {
 
       courseStudent.status = 'scheduled'
       courseStudent.statusLabel = 'Scheduled'
-      courseStudent.category = 'major'
-      courseStudent.categoryLabel = 'Major'
+
+      const categoryData = getCourseCategory(courseStudent.course_id)
+      courseStudent.category = categoryData.category
+      courseStudent.categoryLabel = categoryData.categoryLabel
 
       const year = courseStudent.year
       const semesterId = courseStudent.semester_id
@@ -466,14 +606,80 @@ async function getStudentCourses() {
     console.error('Error fetching courses:', err)
   }
 }
-onMounted(() => {
-  getStudent()
+
+onMounted(async () => {
+  await getStudent()
+  await getMajorCourses()
+  await getMinorCourses()
+  await getCoreCourses()
   getStudentCourses()
 })
 
 const printChecksheet = () => {
   window.print()
 }
+const creditBreakdown = computed(() => {
+  let major = 0
+  let minor = 0
+  let core = 0
+  let elective = 0
+
+  const combined = []
+
+  for (let i = 0; i < transferCourses.value.length; i++) {
+    combined.push(transferCourses.value[i])
+  }
+  for (let i = 0; i < year1Fall.value.length; i++) {
+    combined.push(year1Fall.value[i])
+  }
+  for (let i = 0; i < year1Spring.value.length; i++) {
+    combined.push(year1Spring.value[i])
+  }
+  for (let i = 0; i < year2Fall.value.length; i++) {
+    combined.push(year2Fall.value[i])
+  }
+  for (let i = 0; i < year2Spring.value.length; i++) {
+    combined.push(year2Spring.value[i])
+  }
+  for (let i = 0; i < year3Fall.value.length; i++) {
+    combined.push(year3Fall.value[i])
+  }
+  for (let i = 0; i < year3Spring.value.length; i++) {
+    combined.push(year3Spring.value[i])
+  }
+  for (let i = 0; i < year4Fall.value.length; i++) {
+    combined.push(year4Fall.value[i])
+  }
+  for (let i = 0; i < year4Spring.value.length; i++) {
+    combined.push(year4Spring.value[i])
+  }
+
+  for (let i = 0; i < combined.length; i++) {
+    const currentCourse = combined[i]
+    const credits = currentCourse.course.credits || 0
+
+    if (currentCourse.category === 'major') {
+      major += credits
+    } else if (currentCourse.category === 'minor') {
+      minor += credits
+    } else if (currentCourse.category === 'core') {
+      core += credits
+    } else if (currentCourse.category === 'elective') {
+      elective += credits
+    }
+  }
+
+  return {
+    major: major,
+    minor: minor,
+    core: core,
+    elective: elective,
+    majorPercent: (major / totalCredits.value) * 100,
+    minorPercent: (minor / totalCredits.value) * 100,
+    corePercent: (core / totalCredits.value) * 100,
+    electivePercent: (elective / totalCredits.value) * 100,
+  }
+})
 </script>
 
 <style scoped>
@@ -504,5 +710,105 @@ const printChecksheet = () => {
 
 .ml-auto {
   margin-left: auto;
+}
+.progress-container {
+  margin: 20px 0;
+}
+
+.progress-bar {
+  display: flex;
+  height: 30px;
+  background-color: #e0e0e0;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.progressChunk {
+  height: 100%;
+  transition: width 0.3s;
+}
+
+.progressChunk.major {
+  background-color: #3273dc;
+}
+
+.progressChunk.minor {
+  background-color: #48c774;
+}
+
+.progressChunk.core {
+  background-color: #ffdd57;
+}
+
+.progressChunk.elective {
+  background-color: #9b59b6;
+}
+
+.progress-label {
+  text-align: center;
+  margin-top: 5px;
+  font-weight: bold;
+}
+.category-legend {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 10px;
+  font-size: 0.9rem;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.legend-color {
+  width: 16px;
+  height: 16px;
+  border-radius: 3px;
+  display: inline-block;
+}
+
+.legend-color.major {
+  background-color: #3273dc;
+}
+
+.legend-color.minor {
+  background-color: #48c774;
+}
+
+.legend-color.core {
+  background-color: #ffdd57;
+}
+
+.legend-color.elective {
+  background-color: #9b59b6;
+}
+.category-badge {
+  font-size: 0.75rem;
+  padding: 2px 8px;
+  border-radius: 3px;
+  margin-left: 8px;
+}
+
+.category-major {
+  background-color: #3273dc;
+  color: white;
+}
+
+.category-minor {
+  background-color: #48c774;
+  color: white;
+}
+
+.category-core {
+  background-color: #ffdd57;
+  color: #363636;
+}
+
+.category-elective {
+  background-color: #9b59b6;
+  color: white;
 }
 </style>
