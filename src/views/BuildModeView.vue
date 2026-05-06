@@ -71,6 +71,13 @@
         <div class="box">
           <h2 class="title is-5">Course Schedule</h2>
 
+          <div class="tags">
+            <span class="tag is-light" style="border: 2px solid #ddd">Scheduled</span>
+            <span class="tag is-info" style="border: 2px solid #00d1b2">In Progress</span>
+            <span class="tag is-success" style="border: 2px solid #48c774">Completed</span>
+            <span class="tag is-danger" style="border: 2px solid #ff3860">Failed</span>
+          </div>
+
           <div class="mb-5">
             <h3 class="title is-6"><i class="fas fa-exchange-alt"></i> Transfer Credits</h3>
             <SemesterBox
@@ -745,6 +752,45 @@ const getCourseCategory = (courseId) => {
   }
 
   return { category: 'elective', categoryLabel: 'Elective' }
+}
+
+const toggleCourseStatus = async (course) => {
+  let newStatusId = 4
+
+  if (course.course_status_id === 4) {
+    newStatusId = 3
+  } else if (course.course_status_id === 3) {
+    newStatusId = 2
+  } else if (course.course_status_id === 2) {
+    newStatusId = 1
+  } else {
+    newStatusId = 4
+  }
+
+  try {
+    await axios.put(
+      'https://checksheets.cscprof.com/studentcourses',
+      {
+        course_student_id: course.course_student_id,
+        student_id: course.student_id,
+        course_id: course.course_id,
+        semester_id: course.semester_id,
+        year: course.year,
+        course_status_id: newStatusId,
+        grade: course.grade,
+      },
+      {
+        headers: {
+          'x-token': localStorage.getItem('authToken') || '',
+          'Content-Type': 'application/json',
+        },
+      },
+    )
+
+    await getStudentCourses()
+  } catch (error) {
+    console.error('Error updating status:', error)
+  }
 }
 
 onMounted(async () => {

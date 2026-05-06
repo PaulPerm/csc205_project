@@ -31,6 +31,12 @@ const router = createRouter({
       name: 'build',
       component: BuildModeView,
     },
+    {
+      path: '/print-schedule/:id',
+      name: 'PrintSchedule',
+      component: () => import('../views/PrintScheduleView.vue'),
+      meta: { requiresAuth: true },
+    },
   ],
 })
 

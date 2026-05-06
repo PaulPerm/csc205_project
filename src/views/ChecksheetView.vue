@@ -13,9 +13,10 @@
           <p class="subtitle is-6">Four-Year Academic Plan</p>
 
           <div class="tags">
-            <span class="tag is-info">Enrolled</span>
-            <span class="tag is-success">Completed</span>
-            <span class="tag is-danger">Failed</span>
+            <span class="tag is-light" style="border: 2px solid #ddd">Scheduled</span>
+            <span class="tag is-info" style="border: 2px solid #00d1b2">In Progress</span>
+            <span class="tag is-success" style="border: 2px solid #48c774">Completed</span>
+            <span class="tag is-danger" style="border: 2px solid #ff3860">Failed</span>
             <strong class="ml-auto">{{ creditsEarned }} / {{ totalCredits }} Credits Earned</strong>
           </div>
 
@@ -23,91 +24,83 @@
             <router-link :to="`/build/${studentId}`" class="button is-primary">
               Enter Build Mode
             </router-link>
-            <button class="button is-light" @click="printChecksheet">Print</button>
+            <router-link :to="`/print-schedule/${studentId}`" class="button is-primary">
+              <i class="fas fa-print"></i> Print Schedule
+            </router-link>
+
             <router-link to="/students" class="button is-light"> Back to Students </router-link>
           </div>
         </div>
 
-        <div class="box">
-          <h3 class="title is-5">Metrics</h3>
-          <div class="columns">
-            <div class="column">
-              <p class="heading">Completed</p>
-              <p class="title">{{ metrics.completed }}</p>
-            </div>
-            <div class="column">
-              <p class="heading">Enrolled</p>
-              <p class="title">{{ metrics.enrolled }}</p>
-            </div>
-            <div class="column">
-              <p class="heading">Remaining</p>
-              <p class="title">{{ metrics.remaining }}</p>
-            </div>
-          </div>
-          <p class="mt-3"><strong>Overall Progress</strong></p>
-          <div class="progress-container">
-            <div class="progress-bar">
-              <div
-                class="progressChunk major"
-                :style="{ width: creditBreakdown.majorPercent + '%' }"
-              ></div>
-              <div
-                class="progressChunk minor"
-                :style="{ width: creditBreakdown.minorPercent + '%' }"
-              ></div>
-              <div
-                class="progressChunk core"
-                :style="{ width: creditBreakdown.corePercent + '%' }"
-              ></div>
-              <div
-                class="progressChunk elective"
-                :style="{ width: creditBreakdown.electivePercent + '%' }"
-              ></div>
-            </div>
-            <div class="progress-label">{{ creditsEarned }} / {{ totalCredits }} Credits</div>
-          </div>
-          <div class="category-legend">
-            <span class="legend-item">
-              <span class="legend-color major"></span>
-              Major: {{ creditBreakdown.major }} credits
-            </span>
-            <span class="legend-item">
-              <span class="legend-color minor"></span>
-              Minor: {{ creditBreakdown.minor }} credits
-            </span>
-            <span class="legend-item">
-              <span class="legend-color core"></span>
-              Core: {{ creditBreakdown.core }} credits
-            </span>
-            <span class="legend-item">
-              <span class="legend-color elective"></span>
-              Elective: {{ creditBreakdown.elective }} credits
-            </span>
-          </div>
-        </div>
-
-        <div v-if="transferCourses.length > 0" class="box">
-          <h3 class="title is-5"><i class="fas fa-exchange-alt"></i> Transfer Credits</h3>
-          <div class="columns is-vcentered mb-2">
-            <div class="column"><strong>Transfer Courses</strong></div>
-            <div class="column is-narrow has-text-right">
-              {{ calculateCredits(transferCourses) }} Credits
-            </div>
+        <div class="box" @click="metricsExpanded = !metricsExpanded" style="cursor: pointer">
+          <div class="metrics-header">
+            <h3 class="title is-5">
+              Metrics
+              <i
+                :class="metricsExpanded ? 'fas fa-chevron-up' : 'fas fa-chevron-down'"
+                style="margin-left: 10px; font-size: 0.8rem"
+              ></i>
+            </h3>
           </div>
 
-          <div
-            v-for="course in transferCourses"
-            :key="course.course_student_id"
-            class="box course-card"
-          >
-            <div class="columns is-vcentered is-mobile">
+          <div v-if="metricsExpanded">
+            <div class="columns">
               <div class="column">
-                <strong>{{ course.course.course_code }}</strong> - {{ course.course.course_name }}
-                <span class="category-badge" :class="`category-${course.category}`">
-                  {{ course.categoryLabel }}
-                </span>
-                <div class="is-size-7 has-text-grey mt-1">{{ course.course.credits }} credits</div>
+                <p class="heading">Completed</p>
+                <p class="title">{{ metrics.completed }}</p>
               </div>
+              <div class="column">
+                <p class="heading">In Progress</p>
+                <p class="title">{{ metrics.inProgress }}</p>
+              </div>
+              <div class="column">
+                <p class="heading">Scheduled</p>
+                <p class="title">{{ metrics.scheduled }}</p>
+              </div>
+              <div class="column">
+                <p class="heading">Remaining</p>
+                <p class="title">{{ metrics.remaining }}</p>
+              </div>
+            </div>
+            <p class="mt-3"><strong>Overall Progress</strong></p>
+            <div class="progress-container">
+              <div class="progress-bar">
+                <div
+                  class="progressChunk major"
+                  :style="{ width: creditBreakdown.majorPercent + '%' }"
+                ></div>
+                <div
+                  class="progressChunk minor"
+                  :style="{ width: creditBreakdown.minorPercent + '%' }"
+                ></div>
+                <div
+                  class="progressChunk core"
+                  :style="{ width: creditBreakdown.corePercent + '%' }"
+                ></div>
+                <div
+                  class="progressChunk elective"
+                  :style="{ width: creditBreakdown.electivePercent + '%' }"
+                ></div>
+              </div>
+              <div class="progress-label">{{ creditsEarned }} / {{ totalCredits }} Credits</div>
+            </div>
+            <div class="category-legend">
+              <span class="legend-item">
+                <span class="legend-color major"></span>
+                Major: {{ creditBreakdown.major }} credits
+              </span>
+              <span class="legend-item">
+                <span class="legend-color minor"></span>
+                Minor: {{ creditBreakdown.minor }} credits
+              </span>
+              <span class="legend-item">
+                <span class="legend-color core"></span>
+                Core: {{ creditBreakdown.core }} credits
+              </span>
+              <span class="legend-item">
+                <span class="legend-color elective"></span>
+                Elective: {{ creditBreakdown.elective }} credits
+              </span>
             </div>
           </div>
         </div>
@@ -130,6 +123,9 @@
                 v-for="course in year1Fall"
                 :key="course.course_student_id"
                 class="box course-card"
+                :class="`status-${course.status}`"
+                @click="toggleCourseStatus(course)"
+                style="cursor: pointer"
               >
                 <div class="columns is-vcentered is-mobile">
                   <div class="column">
@@ -161,6 +157,9 @@
                 v-for="course in year1Spring"
                 :key="course.course_student_id"
                 class="box course-card"
+                :class="`status-${course.status}`"
+                @click="toggleCourseStatus(course)"
+                style="cursor: pointer"
               >
                 <div class="columns is-vcentered is-mobile">
                   <div class="column">
@@ -197,6 +196,9 @@
                 v-for="course in year2Fall"
                 :key="course.course_student_id"
                 class="box course-card"
+                :class="`status-${course.status}`"
+                @click="toggleCourseStatus(course)"
+                style="cursor: pointer"
               >
                 <div class="columns is-vcentered is-mobile">
                   <div class="column">
@@ -228,6 +230,9 @@
                 v-for="course in year2Spring"
                 :key="course.course_student_id"
                 class="box course-card"
+                :class="`status-${course.status}`"
+                @click="toggleCourseStatus(course)"
+                style="cursor: pointer"
               >
                 <div class="columns is-vcentered is-mobile">
                   <div class="column">
@@ -264,6 +269,9 @@
                 v-for="course in year3Fall"
                 :key="course.course_student_id"
                 class="box course-card"
+                :class="`status-${course.status}`"
+                @click="toggleCourseStatus(course)"
+                style="cursor: pointer"
               >
                 <div class="columns is-vcentered is-mobile">
                   <div class="column">
@@ -295,6 +303,9 @@
                 v-for="course in year3Spring"
                 :key="course.course_student_id"
                 class="box course-card"
+                :class="`status-${course.status}`"
+                @click="toggleCourseStatus(course)"
+                style="cursor: pointer"
               >
                 <div class="columns is-vcentered is-mobile">
                   <div class="column">
@@ -331,6 +342,9 @@
                 v-for="course in year4Fall"
                 :key="course.course_student_id"
                 class="box course-card"
+                :class="`status-${course.status}`"
+                @click="toggleCourseStatus(course)"
+                style="cursor: pointer"
               >
                 <div class="columns is-vcentered is-mobile">
                   <div class="column">
@@ -362,6 +376,9 @@
                 v-for="course in year4Spring"
                 :key="course.course_student_id"
                 class="box course-card"
+                :class="`status-${course.status}`"
+                @click="toggleCourseStatus(course)"
+                style="cursor: pointer"
               >
                 <div class="columns is-vcentered is-mobile">
                   <div class="column">
@@ -390,6 +407,7 @@ import { useRoute } from 'vue-router'
 import axios from 'axios'
 import NavBar from '@/components/NavBar.vue'
 
+const metricsExpanded = ref(true)
 const route = useRoute()
 const studentId = route.params.id
 
@@ -504,11 +522,61 @@ const getCourseCategory = (courseId) => {
 
   return { category: 'elective', categoryLabel: 'Elective' }
 }
-const metrics = computed(() => ({
-  completed: creditsEarned.value,
-  enrolled: 0,
-  remaining: totalCredits.value - creditsEarned.value,
-}))
+const metrics = computed(() => {
+  let completed = 0
+  let inProgress = 0
+  let scheduled = 0
+
+  const allCourses = []
+  for (let i = 0; i < transferCourses.value.length; i++) {
+    allCourses.push(transferCourses.value[i])
+  }
+  for (let i = 0; i < year1Fall.value.length; i++) {
+    allCourses.push(year1Fall.value[i])
+  }
+  for (let i = 0; i < year1Spring.value.length; i++) {
+    allCourses.push(year1Spring.value[i])
+  }
+  for (let i = 0; i < year2Fall.value.length; i++) {
+    allCourses.push(year2Fall.value[i])
+  }
+  for (let i = 0; i < year2Spring.value.length; i++) {
+    allCourses.push(year2Spring.value[i])
+  }
+  for (let i = 0; i < year3Fall.value.length; i++) {
+    allCourses.push(year3Fall.value[i])
+  }
+  for (let i = 0; i < year3Spring.value.length; i++) {
+    allCourses.push(year3Spring.value[i])
+  }
+  for (let i = 0; i < year4Fall.value.length; i++) {
+    allCourses.push(year4Fall.value[i])
+  }
+  for (let i = 0; i < year4Spring.value.length; i++) {
+    allCourses.push(year4Spring.value[i])
+  }
+
+  for (let i = 0; i < allCourses.length; i++) {
+    const course = allCourses[i]
+    const credits = course.course.credits || 0
+    const statusName = course.course_status.course_status
+
+    if (statusName === 'Passed' || statusName === 'Transfer') {
+      completed += credits
+    } else if (statusName === 'In-Progress') {
+      inProgress += credits
+    } else if (statusName === 'Scheduled') {
+      scheduled += credits
+    }
+  }
+
+  return {
+    completed: completed,
+    inProgress: inProgress,
+    scheduled: scheduled,
+    remaining: totalCredits.value - completed,
+  }
+})
 
 const calculateCredits = (courses) => {
   let total = 0
@@ -563,8 +631,33 @@ const getStudentCourses = async () => {
     for (let i = 0; i < response.data.length; i++) {
       const courseStudent = response.data[i]
 
-      courseStudent.status = 'scheduled'
-      courseStudent.statusLabel = 'Scheduled'
+      const statusName = courseStudent.course_status.course_status
+
+      let status = 'scheduled'
+      let statusLabel = 'Scheduled'
+
+      if (statusName === 'Passed') {
+        status = 'completed'
+        statusLabel = 'Completed'
+      } else if (statusName === 'In-Progress') {
+        status = 'inprogress'
+        statusLabel = 'In Progress'
+      } else if (statusName === 'Failed') {
+        status = 'failed'
+        statusLabel = 'Failed'
+      } else if (statusName === 'Transfer') {
+        status = 'transfer'
+        statusLabel = 'Transfer'
+      } else if (statusName === 'Scheduled') {
+        status = 'scheduled'
+        statusLabel = 'Scheduled'
+      } else if (statusName === 'Audit') {
+        status = 'audit'
+        statusLabel = 'Audit'
+      }
+
+      courseStudent.status = status
+      courseStudent.statusLabel = statusLabel
 
       const categoryData = getCourseCategory(courseStudent.course_id)
       courseStudent.category = categoryData.category
@@ -572,6 +665,11 @@ const getStudentCourses = async () => {
 
       const year = courseStudent.year
       const semesterId = courseStudent.semester_id
+
+      if (year === 0 || semesterId === 0) {
+        courseStudent.status = 'transfer'
+        courseStudent.statusLabel = 'Transfer'
+      }
 
       if (year === 1) {
         if (semesterId === 1) {
@@ -615,9 +713,6 @@ onMounted(async () => {
   getStudentCourses()
 })
 
-const printChecksheet = () => {
-  window.print()
-}
 const creditBreakdown = computed(() => {
   let major = 0
   let minor = 0
@@ -680,6 +775,45 @@ const creditBreakdown = computed(() => {
     electivePercent: (elective / totalCredits.value) * 100,
   }
 })
+
+const toggleCourseStatus = async (course) => {
+  let newStatusId = 4
+
+  if (course.course_status_id === 4) {
+    newStatusId = 3
+  } else if (course.course_status_id === 3) {
+    newStatusId = 2
+  } else if (course.course_status_id === 2) {
+    newStatusId = 1
+  } else {
+    newStatusId = 4
+  }
+
+  try {
+    await axios.put(
+      'https://checksheets.cscprof.com/studentcourses',
+      {
+        course_student_id: course.course_student_id,
+        student_id: course.student_id,
+        course_id: course.course_id,
+        semester_id: course.semester_id,
+        year: course.year,
+        course_status_id: newStatusId,
+        grade: course.grade,
+      },
+      {
+        headers: {
+          'x-token': localStorage.getItem('authToken') || '',
+          'Content-Type': 'application/json',
+        },
+      },
+    )
+
+    await getStudentCourses()
+  } catch (error) {
+    console.error('Error updating status:', error)
+  }
+}
 </script>
 
 <style scoped>
@@ -810,5 +944,24 @@ const creditBreakdown = computed(() => {
 .category-elective {
   background-color: #9b59b6;
   color: white;
+}
+.status-transfer {
+  background-color: #e3f2fd; /* Light blue background */
+}
+
+.status-completed {
+  background-color: #c8e6c9; /* Light green background */
+}
+
+.status-inprogress {
+  background-color: #b3e5fc; /* Light cyan background */
+}
+
+.status-scheduled {
+  background-color: white; /* White/default */
+}
+
+.status-failed {
+  background-color: #ffcdd2; /* Light red background */
 }
 </style>

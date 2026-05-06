@@ -19,6 +19,7 @@
     </div>
   </div>
 </template>
+
 <script setup lang="ts">
 const props = defineProps({
   course: {
@@ -33,14 +34,13 @@ const handleRemove = () => {
   emit('remove', props.course)
 }
 </script>
-
 <style scoped>
 .scheduled-course {
   background: white;
   padding: 12px;
   margin: 8px 0;
   border-radius: 4px;
-  border-left: 4px solid var(--green);
+  border-left: 4px solid #ddd;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
   position: relative;
 }
@@ -59,22 +59,27 @@ const handleRemove = () => {
 }
 
 .status-transfer {
+  background-color: #e3f2fd !important;
   border-left-color: #3273dc;
 }
 
 .status-completed {
+  background-color: #c8e6c9 !important;
   border-left-color: #48c774;
 }
 
 .status-inprogress {
-  border-left-color: #ffdd57;
+  background-color: #b3e5fc !important;
+  border-left-color: #00d1b2;
 }
 
 .status-scheduled {
+  background-color: white !important;
   border-left-color: #ddd;
 }
 
 .status-failed {
+  background-color: #ffcdd2 !important;
   border-left-color: #ff3860;
 }
 
@@ -101,7 +106,7 @@ const handleRemove = () => {
 }
 
 .category-elective {
-  background-color: #b5b5b5;
+  background-color: #9b59b6;
   color: white;
 }
 </style>
