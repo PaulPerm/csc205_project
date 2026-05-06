@@ -353,7 +353,6 @@ const getStudentCourses = async () => {
     for (let i = 0; i < response.data.length; i++) {
       const courseStudent = response.data[i]
 
-      // Map status
       const statusName = courseStudent.course_status.course_status
       let statusLabel = 'Scheduled'
 
@@ -507,7 +506,6 @@ onMounted(() => {
   border-top: 3px solid #333;
 }
 
-/* Print styles */
 @media print {
   .no-print {
     display: none !important;

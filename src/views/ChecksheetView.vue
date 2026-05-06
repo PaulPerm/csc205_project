@@ -62,6 +62,25 @@
                 <p class="title">{{ metrics.remaining }}</p>
               </div>
             </div>
+
+            <p class="mt-4"><strong>Credits per Semester</strong></p>
+            <div class="semester-chart-vertical">
+              <div class="chart-bars">
+                <div v-for="semester in semesterCredits" :key="semester.name" class="chart-column">
+                  <div
+                    class="bar"
+                    :style="{ height: (semester.credits / maxSemesterCredits) * 100 + '%' }"
+                  ></div>
+                </div>
+              </div>
+              <div class="chart-labels">
+                <div v-for="semester in semesterCredits" :key="semester.name" class="label-group">
+                  <div class="bar-label">{{ semester.name }}</div>
+                  <div class="bar-value-bottom">{{ semester.credits }}</div>
+                </div>
+              </div>
+            </div>
+
             <p class="mt-3"><strong>Overall Progress</strong></p>
             <div class="progress-container">
               <div class="progress-bar">
@@ -407,7 +426,7 @@ import { useRoute } from 'vue-router'
 import axios from 'axios'
 import NavBar from '@/components/NavBar.vue'
 
-const metricsExpanded = ref(true)
+const metricsExpanded = ref(false)
 const route = useRoute()
 const studentId = route.params.id
 
@@ -446,6 +465,24 @@ const creditsEarned = computed(() => {
   return total
 })
 
+const semesterCredits = computed(() => {
+  return [
+    { name: 'Transfer', credits: calculateCredits(transferCourses.value) },
+    { name: 'Y1 Fall', credits: calculateCredits(year1Fall.value) },
+    { name: 'Y1 Spring', credits: calculateCredits(year1Spring.value) },
+    { name: 'Y2 Fall', credits: calculateCredits(year2Fall.value) },
+    { name: 'Y2 Spring', credits: calculateCredits(year2Spring.value) },
+    { name: 'Y3 Fall', credits: calculateCredits(year3Fall.value) },
+    { name: 'Y3 Spring', credits: calculateCredits(year3Spring.value) },
+    { name: 'Y4 Fall', credits: calculateCredits(year4Fall.value) },
+    { name: 'Y4 Spring', credits: calculateCredits(year4Spring.value) },
+  ]
+})
+const maxSemesterCredits = computed(() => {
+  const credits = semesterCredits.value.map((s) => s.credits)
+  const max = Math.max(...credits)
+  return Math.max(max, 12)
+})
 const getMajorCourses = async () => {
   if (!student.value || !student.value.majors[0]) {
     return
@@ -946,22 +983,108 @@ const toggleCourseStatus = async (course) => {
   color: white;
 }
 .status-transfer {
-  background-color: #e3f2fd; /* Light blue background */
+  background-color: #e3f2fd;
 }
 
 .status-completed {
-  background-color: #c8e6c9; /* Light green background */
+  background-color: #c8e6c9;
 }
 
 .status-inprogress {
-  background-color: #b3e5fc; /* Light cyan background */
+  background-color: #b3e5fc;
 }
 
 .status-scheduled {
-  background-color: white; /* White/default */
+  background-color: white;
 }
 
 .status-failed {
-  background-color: #ffcdd2; /* Light red background */
+  background-color: #ffcdd2;
 }
+.chart-bars {
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-end;
+  height: 150px;
+  border-bottom: 2px solid #333;
+  gap: 8px;
+  padding: 0;
+  position: relative;
+}
+
+.chart-column {
+  flex: 1;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  max-width: 50px;
+  height: 100%;
+}
+
+.bar {
+  width: 100%;
+  max-width: 40px;
+  background-color: #48c9b0;
+  transition: height 0.3s;
+}
+
+.chart-labels {
+  display: flex;
+  justify-content: space-around;
+  gap: 8px;
+  margin-top: 6px;
+}
+
+.label-group {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 50px;
+}
+
+.bar-label {
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-align: center;
+  color: #666;
+  white-space: nowrap;
+}
+
+.bar-value-bottom {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #333;
+  margin-top: 2px;
+}
+.semester-chart-vertical {
+  margin-top: 15px;
+  padding: 20px 15px 10px 40px;
+  background-color: white;
+  border-radius: 6px;
+  position: relative;
+}
+
+/* .chart-grid {
+  position: absolute;
+  left: 40px;
+  right: 15px;
+  bottom: 5px;
+  height: 150px;
+  pointer-events: none;
+}
+
+.grid-line {
+  position: absolute;
+  left: 0;
+  right: 0;
+  border-top: 1px solid #e0e0e0;
+  height: 1px;
+} */
+
+/* .grid-label {
+  position: absolute;
+  font-size: 0.7rem;
+  color: #999;
+} */
 </style>
